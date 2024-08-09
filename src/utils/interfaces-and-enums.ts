@@ -29,3 +29,12 @@ export enum ConfigOrderBy {
     Version = "version"
 }
 
+
+// Se define el enum de los roles de usuario
+
+export enum RolEnum {
+    Administrador = "Administrador",
+    Especialista = "Especialista Ing Civil",
+    EspecialistaAvz = "Especialista Ing Civil Avanzado"
+}
+
