@@ -38,3 +38,8 @@ export enum RolEnum {
     EspecialistaAvz = "Especialista Ing Civil Avanzado"
 }
 
+export interface RpcError {
+    message: string
+    status: number
+}
+

@@ -1,8 +1,10 @@
-import { Body, Controller, Delete, Get, Inject, Param, ParseIntPipe, Patch, Post, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpException, Inject, Param, ParseIntPipe, Patch, Post, Query } from '@nestjs/common';
 import { SubsistemaConfigDTO } from './dto/subsistema-config.dto';
 import { UpdateSubsistemaConfigDTO } from './dto/update-subsistema-config.dto';
 import { NameConfigsService } from 'src/utils/global';
 import { ClientProxy } from '@nestjs/microservices';
+import { firstValueFrom } from 'rxjs';
+import { RpcError } from 'src/utils/interfaces-and-enums';
 
 @Controller('subsistemas-config')
 export class SubsistemasConfigController {
@@ -10,29 +12,49 @@ export class SubsistemasConfigController {
 
     @Get("getAllSubsistemasConfig/:idSistemaConfig")
     public async getAllSubsistemasConfig(@Param("idSistemaConfig", ParseIntPipe) idSistemaConfig, @Query("nombre") nombre: String) {
-        return this.configsClient.send('getAllSubsistemasConfig', {
-            idSistemaConfig: idSistemaConfig,
-            nombre: nombre
-        })
+        try {
+            return await firstValueFrom(this.configsClient.send('getAllSubsistemasConfig', {
+                idSistemaConfig: idSistemaConfig,
+                nombre: nombre
+            }))
+        } catch (error) { // siempre en caso de error, este será un RpcExpection
+            const rpcError: RpcError = error
+            throw new HttpException(rpcError.message, rpcError.status)
+        }
     }
 
     @Post("createSubsistemaConfig")
     public async createSubsistemaConfig(@Body() subistemaConfigDTO: SubsistemaConfigDTO) {
-        return this.configsClient.send('createSubsistemaConfig', subistemaConfigDTO)
+        try {
+            return await firstValueFrom(this.configsClient.send('createSubsistemaConfig', subistemaConfigDTO))
+        } catch (error) { // siempre en caso de error, este será un RpcExpection
+            const rpcError: RpcError = error
+            throw new HttpException(rpcError.message, rpcError.status)
+        }
     }
 
     @Patch("updateSubsistemaConfig/:id/:idSistemaConfig")
     public async updateSubsistemaConfig(@Param("id", ParseIntPipe) idSubsistemaConfig: number, @Param("idSistemaConfig", ParseIntPipe) idSistemaConfig,
         @Body() updateSubsistemaConfigDTO: UpdateSubsistemaConfigDTO) {
-        return this.configsClient.send('updateSubsistemaConfig', {
-            idSubsistemaConfig: idSubsistemaConfig,
-            idSistemaConfig: idSistemaConfig,
-            updateSubsistemaConfigDTO: updateSubsistemaConfigDTO
-        })
+        try {
+            return await firstValueFrom(this.configsClient.send('updateSubsistemaConfig', {
+                idSubsistemaConfig: idSubsistemaConfig,
+                idSistemaConfig: idSistemaConfig,
+                updateSubsistemaConfigDTO: updateSubsistemaConfigDTO
+            }))
+        } catch (error) { // siempre en caso de error, este será un RpcExpection
+            const rpcError: RpcError = error
+            throw new HttpException(rpcError.message, rpcError.status)
+        }
     }
 
     @Delete("deleteSubsistemaConfig/:id")
     public async deleteSubsistemaConfig(@Param("id", ParseIntPipe) idSubsistemaConfig: number) {
-        return this.configsClient.send('deleteSubsistemaConfig', idSubsistemaConfig)
+        try {
+            return await firstValueFrom(this.configsClient.send('deleteSubsistemaConfig', idSubsistemaConfig))
+        } catch (error) { // siempre en caso de error, este será un RpcExpection
+            const rpcError: RpcError = error
+            throw new HttpException(rpcError.message, rpcError.status)
+        }
     }
 }

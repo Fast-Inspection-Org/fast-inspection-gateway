@@ -1,10 +1,11 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Query, ParseIntPipe, Inject } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query, ParseIntPipe, Inject, HttpException } from '@nestjs/common';
 import { CreateUsuarioDto } from './dto/create-usuario.dto';
-import { RolEnum } from 'src/utils/interfaces-and-enums';
+import { RolEnum, RpcError } from 'src/utils/interfaces-and-enums';
 import { UpdateUsuarioDto } from './dto/update-usuario.dto';
 import { ClientProxy } from '@nestjs/microservices';
 import { NameUsersAuth } from 'src/utils/global';
 import { LoginDTO } from './dto/login-dto';
+import { firstValueFrom } from 'rxjs';
 
 
 @Controller('users-auth')
@@ -13,44 +14,78 @@ export class UsersAuthController {
 
   @Post('createUsuario')
   public async create(@Body() createUsuarioDto: CreateUsuarioDto) {
-    return this.usersAuthClient.send('createUsuario', createUsuarioDto)
+    try {
+      return await firstValueFrom(this.usersAuthClient.send('createUsuario', createUsuarioDto))
+    } catch (error) { // siempre en caso de error, este será un RpcExpection
+      const rpcError: RpcError = error
+      throw new HttpException(rpcError.message, rpcError.status)
+    }
   }
 
   @Get("getAllUsers")
   public async findAll(@Query("nombre") nombre: string, @Query("rol") rol: RolEnum) {
-    return this.usersAuthClient.send('getAllUsers', {
-      nombre: nombre,
-      rol: rol
-    })
+    try {
+      return await firstValueFrom(this.usersAuthClient.send('getAllUsers', {
+        nombre: nombre,
+        rol: rol
+      }))
+    } catch (error) { // siempre en caso de error, este será un RpcExpection
+      const rpcError: RpcError = error
+      throw new HttpException(rpcError.message, rpcError.status)
+    }
   }
 
   @Get('getUsuario/:id')
   public async findOne(@Param('id', ParseIntPipe) id: number) {
-    return this.usersAuthClient.send('getUsuario', id)
+    try {
+      return await firstValueFrom(this.usersAuthClient.send('getUsuario', id))
+    } catch (error) { // siempre en caso de error, este será un RpcExpection
+      const rpcError: RpcError = error
+      throw new HttpException(rpcError.message, rpcError.status)
+    }
   }
 
   @Patch('updateUser/:id')
   public async update(@Param('id', ParseIntPipe) id: number, @Body() updateUsuarioDto: UpdateUsuarioDto) {
-    return this.usersAuthClient.send('updateUser', {
-      id: id,
-      updateUsuarioDto: updateUsuarioDto
-    })
+    try {
+      return await firstValueFrom(this.usersAuthClient.send('updateUser', {
+        id: id,
+        updateUsuarioDto: updateUsuarioDto
+      }))
+    } catch (error) { // siempre en caso de error, este será un RpcExpection
+      const rpcError: RpcError = error
+      throw new HttpException(rpcError.message, rpcError.status)
+    }
   }
 
   @Delete('deleteUser/:id')
   public async delete(@Param('id', ParseIntPipe) id: number) {
-    return this.usersAuthClient.send('deleteUser', id)
+    try {
+      return await firstValueFrom(this.usersAuthClient.send('deleteUser', id))
+    } catch (error) { // siempre en caso de error, este será un RpcExpection
+      const rpcError: RpcError = error
+      throw new HttpException(rpcError.message, rpcError.status)
+    }
   }
 
   // Rutas de Autenticación
   @Post('login')
   public async login(@Body() loginDTO: LoginDTO) {
-    return this.usersAuthClient.send('login', loginDTO)
+    try {
+      return await firstValueFrom(this.usersAuthClient.send('login', loginDTO))
+    } catch (error) { // siempre en caso de error, este será un RpcExpection
+      const rpcError: RpcError = error
+      throw new HttpException(rpcError.message, rpcError.status)
+    }
   }
 
   @Post('registrer')
   public async registrer(@Body() userDTO: CreateUsuarioDto) {
-    return this.usersAuthClient.send('registrer', userDTO)
+    try {
+      return await firstValueFrom(this.usersAuthClient.send('registrer', userDTO))
+    } catch (error) { // siempre en caso de error, este será un RpcExpection
+      const rpcError: RpcError = error
+      throw new HttpException(rpcError.message, rpcError.status)
+    }
   }
-
 }

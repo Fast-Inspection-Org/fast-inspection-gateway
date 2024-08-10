@@ -3,6 +3,7 @@ import { AppModule } from './app.module';
 import { envs } from './utils/envs';
 import { CorsOptions } from '@nestjs/common/interfaces/external/cors-options.interface';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { ExceptionFilter } from './utils/exeption-filter';
 
 
 async function bootstrap() {
@@ -14,6 +15,9 @@ async function bootstrap() {
     allowedHeaders: 'Content-Type, Accept, Authorization',
     credentials: true,
   };
+
+  // se indica el uso global del rpc expetion filter
+  app.useGlobalFilters(new ExceptionFilter())
 
   app.enableCors(corsOptions);
 
