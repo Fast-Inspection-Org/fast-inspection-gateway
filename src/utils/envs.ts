@@ -11,6 +11,7 @@ interface EnvVars {
     BUILDING_CONTROLLER_PORT: string
     USERS_AUTH_HOST: string
     USERS_AUTH_PORT: string
+    SECRET_WORD: string
 }
 
 export const envs: EnvVars = {
@@ -20,5 +21,6 @@ export const envs: EnvVars = {
     BUILDING_CONTROLLER_HOST: process.env.BUILDING_CONTROLLER_HOST,
     BUILDING_CONTROLLER_PORT: process.env.BUILDING_CONTROLLER_PORT,
     USERS_AUTH_HOST: process.env.USERS_AUTH_HOST,
-    USERS_AUTH_PORT: process.env.USERS_AUTH_PORT
+    USERS_AUTH_PORT: process.env.USERS_AUTH_PORT,
+    SECRET_WORD: process.env.SECRET_WORD
 }

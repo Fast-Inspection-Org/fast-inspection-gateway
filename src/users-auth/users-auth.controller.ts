@@ -22,10 +22,11 @@ export class UsersAuthController {
     }
   }
 
-  @Get("getAllUsers")
-  public async findAll(@Query("nombre") nombre: string, @Query("rol") rol: RolEnum) {
+  @Get("getAllUsers/:idSolicitante") // el parámetro "idSolicitante" representa el indentificador el usuario (administrador) que ejecutó la petición
+  public async findAll(@Param("idSolicitante") idSolicitante: String, @Query("nombre") nombre: string, @Query("rol") rol: RolEnum) {
     try {
       return await firstValueFrom(this.usersAuthClient.send('getAllUsers', {
+        idSolicitante: idSolicitante,
         nombre: nombre,
         rol: rol
       }))
@@ -36,7 +37,7 @@ export class UsersAuthController {
   }
 
   @Get('getUsuario/:id')
-  public async findOne(@Param('id', ParseIntPipe) id: number) {
+  public async findOne(@Param('id') id: string) {
     try {
       return await firstValueFrom(this.usersAuthClient.send('getUsuario', id))
     } catch (error) { // siempre en caso de error, este será un RpcExpection
@@ -46,7 +47,7 @@ export class UsersAuthController {
   }
 
   @Patch('updateUser/:id')
-  public async update(@Param('id', ParseIntPipe) id: number, @Body() updateUsuarioDto: UpdateUsuarioDto) {
+  public async update(@Param('id') id: string, @Body() updateUsuarioDto: UpdateUsuarioDto) {
     try {
       return await firstValueFrom(this.usersAuthClient.send('updateUser', {
         id: id,
@@ -59,7 +60,7 @@ export class UsersAuthController {
   }
 
   @Delete('deleteUser/:id')
-  public async delete(@Param('id', ParseIntPipe) id: number) {
+  public async delete(@Param('id') id: string) {
     try {
       return await firstValueFrom(this.usersAuthClient.send('deleteUser', id))
     } catch (error) { // siempre en caso de error, este será un RpcExpection

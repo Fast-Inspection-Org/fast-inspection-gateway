@@ -2,7 +2,8 @@ import { Module } from '@nestjs/common';
 import { UsersAuthController } from './users-auth.controller';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { envs } from 'src/utils/envs';
-import { NameUsersAuth } from 'src/utils/global';
+import { jwtConstants, NameUsersAuth } from 'src/utils/global';
+import { JwtModule } from '@nestjs/jwt';
 
 @Module({
   controllers: [UsersAuthController],
@@ -17,7 +18,12 @@ import { NameUsersAuth } from 'src/utils/global';
           port: parseInt(envs.USERS_AUTH_PORT)
         }
       }
-    ])
+    ]),
+    JwtModule.register({
+      global: true,
+      secret: jwtConstants.secret,
+      signOptions: { expiresIn: '1d' },
+    })
   ]
 })
 export class UsersAuthModule { }
