@@ -24,10 +24,11 @@ export class UsersAuthController {
 
   @Get("getAllUsers/:idSolicitante") // el parámetro "idSolicitante" representa el indentificador el usuario (administrador) que ejecutó la petición
   public async findAll(@Param("idSolicitante") idSolicitante: String, @Query("nombre") nombre: string, @Query("rol") rol: RolEnum) {
+    
     try {
       return await firstValueFrom(this.usersAuthClient.send('getAllUsers', {
         idSolicitante: idSolicitante,
-        nombre: nombre,
+        nombreUsuario: nombre,
         rol: rol
       }))
     } catch (error) { // siempre en caso de error, este será un RpcExpection

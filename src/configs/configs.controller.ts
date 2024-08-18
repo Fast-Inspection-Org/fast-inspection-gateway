@@ -16,7 +16,7 @@ export class ConfigsController {
 
 
   @Get("getAllConfigs") // Ruta para obtener todas las configuraciones registradas
-  @Roles([RolEnum.Administrador, RolEnum.EspecialistaAvz]) // solo un administrador o especialista avanzado puede usar esta petición
+  @Roles([RolEnum.SuperAdministrador, RolEnum.Administrador, RolEnum.EspecialistaAvz]) // solo un administrador o especialista avanzado puede usar esta petición
   @UseGuards(AuthGuard, RolGuard) // verifica el acceso a la solicitud
   public async getAllConfigs(@Query("version") version: string, @Query("nombre") nombre: String, @Query("orderBy") orderBy: ConfigOrderBy /* parametros representa los filtros de búsqueda */) {
     try {
@@ -30,7 +30,7 @@ export class ConfigsController {
       throw new HttpException(rpcError.message, rpcError.status)
     }
   }
-  @Roles([RolEnum.Administrador, RolEnum.EspecialistaAvz]) // solo un administrador o especialista avanzado puede usar esta petición
+  @Roles([RolEnum.SuperAdministrador, RolEnum.Administrador, RolEnum.EspecialistaAvz]) // solo un administrador o especialista avanzado puede usar esta petición
   @UseGuards(AuthGuard, RolGuard) // verifica el acceso a la solicitud
   @Get("getLastConfig") // Ruta para obtener la ultima configuración registrada
   public async getLastConfig() {
@@ -41,7 +41,7 @@ export class ConfigsController {
       throw new HttpException(rpcError.message, rpcError.status)
     }
   }
-  @Roles([RolEnum.Administrador, RolEnum.EspecialistaAvz]) // solo un administrador o especialista avanzado puede usar esta petición
+  @Roles([RolEnum.SuperAdministrador, RolEnum.Administrador, RolEnum.EspecialistaAvz]) // solo un administrador o especialista avanzado puede usar esta petición
   @UseGuards(AuthGuard, RolGuard) // verifica el acceso a la solicitud
   @Get("getConfigByVersion/:versionConfig") // Ruta para obtener la configuración con una versión en específico
   public async getConfigByVersion(@Param("versionConfig", ParseIntPipe) versionConfig: number) {
@@ -53,7 +53,7 @@ export class ConfigsController {
     }
   }
 
-  @Roles([RolEnum.Administrador, RolEnum.EspecialistaAvz]) // solo un administrador o especialista avanzado puede usar esta petición
+  @Roles([RolEnum.SuperAdministrador, RolEnum.Administrador, RolEnum.EspecialistaAvz]) // solo un administrador o especialista avanzado puede usar esta petición
   @UseGuards(AuthGuard, RolGuard) // verifica el acceso a la solicitud
   @Post("createConfigByOtherConfig/:versionOtherConfig")
   public async createConfigByOtherConfig(@Param("versionOtherConfig", ParseIntPipe) versionOtherConfig: number, @Body() configDTO: ConfigDTO) {
@@ -69,7 +69,7 @@ export class ConfigsController {
   }
 
   @Post("createNewConfig")
-  @Roles([RolEnum.Administrador, RolEnum.EspecialistaAvz]) // solo un administrador o especialista avanzado puede usar esta petición
+  @Roles([RolEnum.SuperAdministrador, RolEnum.Administrador, RolEnum.EspecialistaAvz]) // solo un administrador o especialista avanzado puede usar esta petición
   @UseGuards(AuthGuard, RolGuard) // verifica el acceso a la solicitud
   public async saveNewConfig(@Body() newConfig: ConfigDTO) {
     try {
@@ -81,7 +81,7 @@ export class ConfigsController {
   }
 
   @Delete("deleteConfig/:version") // Ruta para eliminar una configuración en especifico (Método de super administrador)
-  @Roles([RolEnum.Administrador, RolEnum.EspecialistaAvz]) // solo un administrador o especialista avanzado puede usar esta petición
+  @Roles([RolEnum.SuperAdministrador, RolEnum.Administrador, RolEnum.EspecialistaAvz]) // solo un administrador o especialista avanzado puede usar esta petición
   @UseGuards(AuthGuard, RolGuard) // verifica el acceso a la solicitud
   public async deleteConfig(@Param("version", ParseIntPipe) versionConfig: number) {
     try {
@@ -93,7 +93,7 @@ export class ConfigsController {
   }
 
   @Delete("deleteAllConfigs") // Ruta para eliminar todas las configuraciones (Método de super administrador)
-  @Roles([RolEnum.Administrador, RolEnum.EspecialistaAvz]) // solo un administrador o especialista avanzado puede usar esta petición
+  @Roles([RolEnum.SuperAdministrador, RolEnum.Administrador, RolEnum.EspecialistaAvz]) // solo un administrador o especialista avanzado puede usar esta petición
   @UseGuards(AuthGuard, RolGuard) // verifica el acceso a la solicitud
   public async deletedeleteAllConfigs() {
     try {
@@ -105,7 +105,7 @@ export class ConfigsController {
   }
 
   @Patch("updateConfig/:version")
-  @Roles([RolEnum.Administrador, RolEnum.EspecialistaAvz]) // solo un administrador o especialista avanzado puede usar esta petición
+  @Roles([RolEnum.SuperAdministrador, RolEnum.Administrador, RolEnum.EspecialistaAvz]) // solo un administrador o especialista avanzado puede usar esta petición
   @UseGuards(AuthGuard, RolGuard) // verifica el acceso a la solicitud
   public async updateConfig(@Param("version", ParseIntPipe) version: number, @Body() updateConfigDTO: UpdateConfigDTO) {
     try {
@@ -120,7 +120,7 @@ export class ConfigsController {
   }
 
   @Patch("marcarAsActivaConfig/:version")
-  @Roles([RolEnum.Administrador, RolEnum.EspecialistaAvz]) // solo un administrador o especialista avanzado puede usar esta petición
+  @Roles([RolEnum.SuperAdministrador, RolEnum.Administrador, RolEnum.EspecialistaAvz]) // solo un administrador o especialista avanzado puede usar esta petición
   @UseGuards(AuthGuard, RolGuard) // verifica el acceso a la solicitud
   public async marcarAsActivaConfig(@Param("version", ParseIntPipe) version: number) {
     try {
