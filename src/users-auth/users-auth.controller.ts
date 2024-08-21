@@ -6,6 +6,8 @@ import { ClientProxy } from '@nestjs/microservices';
 import { NameUsersAuth } from 'src/utils/global';
 import { LoginDTO } from './dto/login-dto';
 import { firstValueFrom } from 'rxjs';
+import { ActivacionDTO } from './dto/activacion.dto';
+import { FiltersUsuarioDTO } from './dto/filters-usuario.dto';
 
 
 @Controller('users-auth')
@@ -22,9 +24,19 @@ export class UsersAuthController {
     }
   }
 
+  @Post('activarCuentaUsuario')
+  public async activarCuentaUsuario(@Body() activacionDTO: ActivacionDTO) {
+    try {
+      return await firstValueFrom(this.usersAuthClient.send('activarCuentaUsuario', activacionDTO))
+    } catch (error) { // siempre en caso de error, este será un RpcExpection
+      const rpcError: RpcError = error
+      throw new HttpException(rpcError.message, rpcError.status)
+    }
+  }
+
   @Get("getAllUsers/:idSolicitante") // el parámetro "idSolicitante" representa el indentificador el usuario (administrador) que ejecutó la petición
   public async findAll(@Param("idSolicitante") idSolicitante: String, @Query("nombre") nombre: string, @Query("rol") rol: RolEnum) {
-    
+
     try {
       return await firstValueFrom(this.usersAuthClient.send('getAllUsers', {
         idSolicitante: idSolicitante,
@@ -37,15 +49,17 @@ export class UsersAuthController {
     }
   }
 
-  @Get('getUsuario/:id')
+  @Get('getUsuarioById/:id')
   public async findOne(@Param('id') id: string) {
     try {
-      return await firstValueFrom(this.usersAuthClient.send('getUsuario', id))
+      return await firstValueFrom(this.usersAuthClient.send('getUsuarioById', id))
     } catch (error) { // siempre en caso de error, este será un RpcExpection
       const rpcError: RpcError = error
       throw new HttpException(rpcError.message, rpcError.status)
     }
   }
+
+  
 
   @Patch('updateUser/:id')
   public async update(@Param('id') id: string, @Body() updateUsuarioDto: UpdateUsuarioDto) {

@@ -4,6 +4,7 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
 import { envs } from 'src/utils/envs';
 import { jwtConstants, NameUsersAuth } from 'src/utils/global';
 import { JwtModule } from '@nestjs/jwt';
+import { MailerModule } from './mailer/mailer.module';
 
 @Module({
   controllers: [UsersAuthController],
@@ -23,7 +24,8 @@ import { JwtModule } from '@nestjs/jwt';
       global: true,
       secret: jwtConstants.secret,
       signOptions: { expiresIn: '1d' },
-    })
+    }),
+    MailerModule
   ]
 })
 export class UsersAuthModule { }
