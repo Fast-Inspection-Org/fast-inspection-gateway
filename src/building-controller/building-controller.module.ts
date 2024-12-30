@@ -4,11 +4,12 @@ import { BuildingControllerController } from './building-controller.controller';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { NameBuildingController } from 'src/utils/global';
 import { envs } from 'src/utils/envs';
-import { LevantamientosController } from './levantamientos/levantamientos.controller';
-import { DeteriorosController } from './deterioros/deterioros.controller';
+import { InspeccionModule } from './inspeccion/inspeccion.module';
+import { DeterioroModule } from './deterioro/deterioro.module';
+
 
 @Module({
-  controllers: [BuildingControllerController, LevantamientosController, DeteriorosController],
+  controllers: [BuildingControllerController],
   providers: [],
   imports: [
     ClientsModule.register([
@@ -20,7 +21,9 @@ import { DeteriorosController } from './deterioros/deterioros.controller';
           port: parseInt(envs.BUILDING_CONTROLLER_PORT)
         }
       }
-    ])
+    ]),
+    InspeccionModule,
+    DeterioroModule
   ]
 })
 export class BuildingControllerModule { }

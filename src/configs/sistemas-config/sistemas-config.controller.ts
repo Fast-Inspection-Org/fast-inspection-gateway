@@ -62,7 +62,7 @@ export class SistemasConfigController {
     @Delete("deleteSistemaConfig/:id")
     public async deleteSistemaConfig(@Param("id", ParseIntPipe) idSistema: number) {
         try {
-            return await firstValueFrom(this.configsClient.send('deleteSistemaConfig', idSistema))
+            return  firstValueFrom(this.configsClient.send('deleteSistemaConfig', idSistema))
         } catch (error) { // siempre en caso de error, este será un RpcExpection
             const rpcError: RpcError = error
             throw new HttpException(rpcError.message, rpcError.status)
