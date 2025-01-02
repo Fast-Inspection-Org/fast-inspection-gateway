@@ -17,6 +17,9 @@ services:
     ports:
       - "${PORT:-3000}:${PORT:-3000}"
     
+    networks:
+      - fast_inspection_network
+    
 networks:
-  default:
+  fast_inspection_network:
     name: fast_inspection_network

@@ -1,10 +1,12 @@
 import { Body, Controller, Delete, Get, HttpException, Inject, Param, ParseIntPipe, Patch, Post, Query } from '@nestjs/common';
-import { CampoDTO } from './dto/Campo.dto';
 import { UpdateCampoDTO } from './dto/update-campo.dto';
 import { ClientProxy } from '@nestjs/microservices';
 import { NameConfigsService } from 'src/utils/global';
 import { firstValueFrom } from 'rxjs';
 import { RpcError } from 'src/utils/interfaces-and-enums';
+import { CampoDTO } from './dto/campo.dto';
+
+
 
 @Controller('campo')
 export class CampoController {
