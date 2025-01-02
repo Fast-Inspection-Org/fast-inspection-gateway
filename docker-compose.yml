@@ -1,0 +1,22 @@
+services:
+  fast_inspection_gateway:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      NODE_ENV: ${NODE_ENV:-development}
+      CONFIGS_SERVICE_HOST: ${CONFIGS_SERVICE_HOST:-fast_inspection_config_ms}
+      CONFIGS_SERVICE_PORT: ${CONFIGS_SERVICE_PORT:-3001}
+      BUILDING_CONTROLLER_HOST: ${BUILDING_CONTROLLER_HOST:-fast_inspection_inspection_controller_ms}
+      BUILDING_CONTROLLER_PORT: ${BUILDING_CONTROLLER_PORT:-3003}
+      USERS_AUTH_HOST: ${USERS_AUTH_HOST:-localhost}
+      USERS_AUTH_PORT: ${USERS_AUTH_PORT:-3002}
+      HOST: ${HOST:-localhost}
+      PORT: ${PORT:-3000}
+      SECRET_WORD: "Its become"
+    ports:
+      - "${PORT:-3000}:${PORT:-3000}"
+    
+networks:
+  default:
+    name: fast_inspection_network
