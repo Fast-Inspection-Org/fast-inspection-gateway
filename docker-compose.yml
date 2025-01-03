@@ -9,9 +9,9 @@ services:
       CONFIGS_SERVICE_PORT: ${CONFIGS_SERVICE_PORT:-3001}
       BUILDING_CONTROLLER_HOST: ${BUILDING_CONTROLLER_HOST:-fast_inspection_inspection_controller_ms}
       BUILDING_CONTROLLER_PORT: ${BUILDING_CONTROLLER_PORT:-3003}
-      USERS_AUTH_HOST: ${USERS_AUTH_HOST:-localhost}
+      USERS_AUTH_HOST: ${USERS_AUTH_HOST:-fast_inspection_users_auth_ms}
       USERS_AUTH_PORT: ${USERS_AUTH_PORT:-3002}
-      HOST: ${HOST:-localhost}
+      HOST: ${HOST:-fast_inspection_gateway}
       PORT: ${PORT:-3000}
       SECRET_WORD: "Its become"
     ports:
