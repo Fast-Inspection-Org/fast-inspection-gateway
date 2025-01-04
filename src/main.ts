@@ -26,7 +26,7 @@ async function bootstrap() {
     .setTitle('Fast Inspection')
     .setDescription('The Fast Inspection API description')
     .setVersion('1.0')
-    .addTag('cats')
+    .addTag('fast-inspection')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
