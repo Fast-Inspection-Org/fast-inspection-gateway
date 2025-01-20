@@ -7,9 +7,9 @@ import { SistemaConfigDTO } from "../sistemas-config/dto/sistema-config.dto"
 
 export class ConfigDTO {
     version?: number
-    nombre: String
-    descripcion: String
-    herramientas: Array<HerramientaDTO> // Una configuracion puede tener muchas herramientas registradas
-    indicesCalculables: Array<IndiceCalculableDTO> // Atributo que representa los indices calculables definidos en la configuracion
-    sistemasConfigs: Array<SistemaConfigDTO> // Una configuracion tiene muchos sistemas definidos  
+    nombre: string
+    descripcion: string
+    herramientas?: Array<HerramientaDTO> // Una configuracion puede tener muchas herramientas registradas
+    indicesCalculables?: Array<IndiceCalculableDTO> // Atributo que representa los indices calculables definidos en la configuracion
+    sistemasConfigs?: Array<SistemaConfigDTO> // Una configuracion tiene muchos sistemas definidos  
 }

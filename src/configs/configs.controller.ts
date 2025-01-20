@@ -9,7 +9,9 @@ import { ExceptionFilter } from 'src/utils/exeption-filter';
 import { AuthGuard } from 'src/users-auth/guards/auth.guard';
 import { Roles } from 'src/decoradores/rol.decorator';
 import { RolGuard } from 'src/users-auth/guards/rol/rol.guard';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('configs')
 @Controller('configs')
 export class ConfigsController {
   constructor(@Inject(NameConfigsService) private readonly configsClient: ClientProxy) { }

@@ -1,9 +1,11 @@
 import { Controller, Delete, HttpException, Inject, Param, ParseIntPipe } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
+import { ApiTags } from '@nestjs/swagger';
 import { firstValueFrom } from 'rxjs';
 import { NameConfigsService } from 'src/utils/global';
 import { RpcError } from 'src/utils/interfaces-and-enums';
 
+@ApiTags("herramientas")
 @Controller('herramientas')
 export class HerramientasController {
     constructor(@Inject(NameConfigsService) private readonly configsClient: ClientProxy) { }

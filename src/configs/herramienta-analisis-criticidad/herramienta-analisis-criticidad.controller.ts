@@ -5,7 +5,9 @@ import { NameConfigsService } from 'src/utils/global';
 import { ClientProxy } from '@nestjs/microservices';
 import { firstValueFrom } from 'rxjs';
 import { RpcError } from 'src/utils/interfaces-and-enums';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags("herramienta-analisis-criticidad")
 @Controller('herramienta-analisis-criticidad')
 export class HerramientaAnalisisCriticidadController {
 
