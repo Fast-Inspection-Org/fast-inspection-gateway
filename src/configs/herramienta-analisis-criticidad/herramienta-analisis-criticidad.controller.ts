@@ -26,7 +26,7 @@ import {
 } from '@nestjs/swagger';
 import { apiResponses } from 'src/utils/api-responses';
 
-@ApiTags('herramienta-analisis-criticidad')
+@ApiTags('Herramientas de Tipo Análisis de Criticidad')
 @Controller('herramienta-analisis-criticidad')
 export class HerramientaAnalisisCriticidadController {
   constructor(

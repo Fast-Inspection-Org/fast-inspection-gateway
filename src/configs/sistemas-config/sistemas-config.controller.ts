@@ -27,7 +27,7 @@ import {
 } from '@nestjs/swagger';
 import { apiResponses } from 'src/utils/api-responses';
 
-@ApiTags('sistemas-config')
+@ApiTags('Sistemas de una Configuración')
 @Controller('sistemas-config')
 export class SistemasConfigController {
   constructor(

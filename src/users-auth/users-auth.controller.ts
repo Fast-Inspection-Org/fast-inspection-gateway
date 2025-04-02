@@ -28,7 +28,7 @@ import {
 } from '@nestjs/swagger';
 import { apiResponses } from 'src/utils/api-responses';
 
-@ApiTags('autenticacion-usuarios')
+@ApiTags('Gestión de Usuarios y Autenticación')
 @Controller('users-auth')
 export class UsersAuthController {
   constructor(

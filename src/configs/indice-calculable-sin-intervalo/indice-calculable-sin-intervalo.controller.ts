@@ -26,7 +26,7 @@ import {
 } from '@nestjs/swagger';
 import { apiResponses } from 'src/utils/api-responses';
 
-@ApiTags('indices-calculables-sin-intervalo')
+@ApiTags('Indices Calculables sin Intervalo de una Configuración')
 @Controller('indice-calculable-sin-intervalo')
 export class IndiceCalculableSinIntervaloController {
   constructor(

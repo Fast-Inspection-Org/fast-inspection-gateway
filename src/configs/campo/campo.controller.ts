@@ -27,7 +27,7 @@ import {
 } from '@nestjs/swagger';
 import { apiResponses } from 'src/utils/api-responses';
 
-@ApiTags('campos')
+@ApiTags('Campos de una Configuración')
 @Controller('campo')
 export class CampoController {
   constructor(

@@ -21,7 +21,7 @@ import {
 } from '@nestjs/swagger';
 import { apiResponses } from 'src/utils/api-responses';
 
-@ApiTags('inspecciones')
+@ApiTags('Inspecciones')
 @Controller('inspections')
 export class InspeccionController {
   constructor(

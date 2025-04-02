@@ -26,7 +26,7 @@ import {
 } from '@nestjs/swagger';
 import { apiResponses } from 'src/utils/api-responses';
 
-@ApiTags('tipo-deterioro-analisis-criticidad-config')
+@ApiTags('Tipos de deterioro Análisis de Criticidad de una Configuración')
 @Controller('tipo-deterioro-analisis-criticidad-config')
 export class TipoDeterioroAnalisisCriticidadConfigController {
   constructor(

@@ -27,7 +27,7 @@ import {
 } from '@nestjs/swagger';
 import { apiResponses } from 'src/utils/api-responses';
 
-@ApiTags('materiales-config')
+@ApiTags('Materiales de una Configuración')
 @Controller('materiales-config')
 export class MaterialesConfigController {
   constructor(
