@@ -44,7 +44,7 @@ export class IndiceCalculableDTO {
   @ApiProperty({
     description:
       'Representa la configuración al que pertenece dicho índice calculable',
-    example: '{"id": 1}',
+    example: '{"version": 1}',
     type: 'json',
     required: true,
   })
