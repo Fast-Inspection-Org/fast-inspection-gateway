@@ -151,12 +151,12 @@ export class EdificationsControllerController {
     description: 'ID de la edificación a actualizar',
   })
   @ApiBody({
-    type: UpdateEdificacionDto,
+    type: CreateEdificacionDto,
     description: 'Objeto con los campos a actualizar de la edificación',
   })
   async update(
     @Param('id') id: string,
-    @Body() updateEdificacionDto: UpdateEdificacionDto,
+    @Body() updateEdificacionDto: CreateEdificacionDto,
   ) {
     try {
       return await firstValueFrom(
