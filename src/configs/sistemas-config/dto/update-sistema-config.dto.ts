@@ -12,7 +12,7 @@ export class UpdateSistemaConfigDTO {
   @ApiProperty({
     description:
       'Representa la Herramienta seleccionada para ser usada en este sistema',
-    example: '{id: 2}',
+    example: '{"id": 2}',
     type: 'json',
     required: true,
   })

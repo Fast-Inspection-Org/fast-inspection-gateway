@@ -16,7 +16,7 @@ export class SistemaConfigDTO {
   @ApiProperty({
     description:
       'Representa la Herramienta seleccionada para ser usada en este sistema',
-    example: '{id: 2}',
+    example: '{"id": 2}',
     type: 'json',
     required: true,
   })
@@ -24,7 +24,7 @@ export class SistemaConfigDTO {
   @ApiProperty({
     description:
       'Representa la Configuración a la que pertenecerá dicho sistema',
-    example: '{id: 2}',
+    example: '{"id": 2}',
     type: 'json',
     required: true,
   })
