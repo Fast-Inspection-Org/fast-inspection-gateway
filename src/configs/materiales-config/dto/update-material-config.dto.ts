@@ -1,3 +1,11 @@
+import { ApiProperty } from '@nestjs/swagger';
+
 export class UpdateMaterialConfigDTO {
-    nombre: String
+  @ApiProperty({
+    description: 'Representa el nombre del material de configuración',
+    example: 'Acero',
+    type: 'texto',
+    required: true,
+  })
+  nombre: String;
 }
