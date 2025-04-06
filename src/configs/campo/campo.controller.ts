@@ -25,7 +25,8 @@ import {
   ApiParam,
   ApiQuery,
 } from '@nestjs/swagger';
-import { apiResponses } from 'src/utils/api-responses';
+import { ApiPaginatedResponse, apiResponses } from 'src/utils/api-responses';
+import { CampoSerializable } from './serializable/campo.serializable';
 
 @ApiTags('Campos de una Configuración')
 @Controller('campo')
@@ -44,6 +45,10 @@ export class CampoController {
     status: 200,
     description:
       'Lista de campos recuperada exitosamente. Retorna un array de objetos de campo.',
+    type: ApiPaginatedResponse(
+      CampoSerializable,
+      'Representa la lista de campos obtenidos como respuesta de la solicitud',
+    ),
   })
   @ApiResponse(apiResponses[400])
   @ApiResponse(apiResponses[401])
