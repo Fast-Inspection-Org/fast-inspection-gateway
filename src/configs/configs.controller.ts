@@ -33,7 +33,8 @@ import {
   ApiParam,
   ApiQuery,
 } from '@nestjs/swagger';
-import { apiResponses } from 'src/utils/api-responses';
+import { ApiPaginatedResponse, apiResponses } from 'src/utils/api-responses';
+import { ConfigSerializable } from './serializable/config.serializable';
 
 @ApiTags('Configuraciones')
 @Controller('configs')
@@ -58,6 +59,10 @@ export class ConfigsController {
     status: 200,
     description:
       'Lista de configuraciones recuperada exitosamente. Retorna un array de objetos de configuración.',
+    type: ApiPaginatedResponse(
+      ConfigSerializable,
+      'Representa los datos obtenidos como resultado de la de solicitud',
+    ),
   })
   @ApiResponse(apiResponses[400])
   @ApiResponse(apiResponses[401])
@@ -112,6 +117,7 @@ export class ConfigsController {
     status: 200,
     description:
       'Última configuración recuperada exitosamente. Retorna el objeto de configuración.',
+    type: ConfigSerializable,
   })
   @ApiResponse(apiResponses[400])
   @ApiResponse(apiResponses[401])
@@ -140,6 +146,7 @@ export class ConfigsController {
     status: 200,
     description:
       'Configuración recuperada exitosamente. Retorna el objeto de configuración solicitado.',
+    type: ConfigSerializable,
   })
   @ApiResponse(apiResponses[400])
   @ApiResponse(apiResponses[401])
