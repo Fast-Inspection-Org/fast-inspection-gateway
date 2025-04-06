@@ -25,7 +25,8 @@ import {
   ApiParam,
   ApiQuery,
 } from '@nestjs/swagger';
-import { apiResponses } from 'src/utils/api-responses';
+import { ApiPaginatedResponse, apiResponses } from 'src/utils/api-responses';
+import { SubsistemaConfigSerializable } from './serializable/subsistema-config.serializable';
 
 @ApiTags('Subsistemas de una Configuración')
 @Controller('subsistemas-config')
@@ -44,6 +45,10 @@ export class SubsistemasConfigController {
     status: 200,
     description:
       'Lista de subsistemas de configuración recuperada exitosamente. Retorna un array de objetos.',
+    type: ApiPaginatedResponse(
+      SubsistemaConfigSerializable,
+      'Representa la lista de subsistemas obtenidos como respuesta de la solicitud',
+    ),
   })
   @ApiResponse(apiResponses[400])
   @ApiResponse(apiResponses[401])
