@@ -25,7 +25,8 @@ import {
   ApiParam,
   ApiQuery,
 } from '@nestjs/swagger';
-import { apiResponses } from 'src/utils/api-responses';
+import { ApiPaginatedResponse, apiResponses } from 'src/utils/api-responses';
+import { MaterialConfigSerializable } from './serializable/material-config.serializable';
 
 @ApiTags('Materiales de una Configuración')
 @Controller('materiales-config')
@@ -44,6 +45,10 @@ export class MaterialesConfigController {
     status: 200,
     description:
       'Lista de materiales de configuración recuperada exitosamente. Retorna un array de objetos.',
+    type: ApiPaginatedResponse(
+      MaterialConfigSerializable,
+      'Representa la lista de materiales obtenidos como respuesta de la solicitud',
+    ),
   })
   @ApiResponse(apiResponses[400])
   @ApiResponse(apiResponses[401])
