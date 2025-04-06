@@ -25,7 +25,9 @@ import {
   ApiParam,
   ApiQuery,
 } from '@nestjs/swagger';
-import { apiResponses } from 'src/utils/api-responses';
+import { ApiPaginatedResponse, apiResponses } from 'src/utils/api-responses';
+import { SistemaConfigSerializable } from './serializable/sistema-config.serializable';
+import { HerramientaSerializable } from '../herramientas/serializable/herramienta.serializable';
 
 @ApiTags('Sistemas de una Configuración')
 @Controller('sistemas-config')
@@ -111,6 +113,10 @@ export class SistemasConfigController {
     status: 200,
     description:
       'Lista de configuraciones de sistema recuperada exitosamente. Retorna un array de objetos.',
+    type: ApiPaginatedResponse(
+      SistemaConfigSerializable,
+      'Representa la lista de sistemas obtenidos como respuesta de la solicitud',
+    ),
   })
   @ApiResponse(apiResponses[400])
   @ApiResponse(apiResponses[401])
@@ -135,6 +141,10 @@ export class SistemasConfigController {
     status: 200,
     description:
       'Lista de configuraciones filtradas recuperada exitosamente. Retorna un array de objetos.',
+    type: ApiPaginatedResponse(
+      SistemaConfigSerializable,
+      'Representa la lista de sistemas obtenidos como respuesta de la solicitud',
+    ),
   })
   @ApiResponse(apiResponses[400])
   @ApiResponse(apiResponses[401])
@@ -213,6 +223,7 @@ export class SistemasConfigController {
     status: 200,
     description:
       'Información de herramienta recuperada exitosamente. Retorna el objeto solicitado.',
+    type: HerramientaSerializable,
   })
   @ApiResponse(apiResponses[400])
   @ApiResponse(apiResponses[401])
