@@ -32,18 +32,49 @@ export class ApiPaginatedResponse<T> {
 }
   */
 
+
+
+export class PaginatedResponse<T> {
+  @ApiProperty({
+    description: 'Array de items paginados',
+    isArray: true,
+  })
+  data: T[];
+
+}
+
+export class PaginationMeta {
+  @ApiProperty({ example: 100 })
+  totalItems: number;
+  
+  @ApiProperty({ example: 10 })
+  totalPages: number;
+  
+  @ApiProperty({ example: 1 })
+  currentPage: number;
+  
+  @ApiProperty({ example: 10 })
+  itemsPerPage: number;
+}
+
 export function ApiPaginatedResponse<T>(
   classRef: Type<T>,
   dataDescription: string,
-) {
-  class ResClass {
+): any {
+  // Creamos una clase dinámica para evitar problemas de caché
+  class DynamicPaginatedResponse extends PaginatedResponse<T> {
     @ApiProperty({
       description: dataDescription,
       type: classRef,
       isArray: true,
-      required: true,
     })
-    data: ConfigSerializable;
+    data: T[];
   }
-  return ResClass;
+
+  // Forzamos el nombre único para cada clase
+  Object.defineProperty(DynamicPaginatedResponse, 'name', {
+    value: `Paginated${classRef.name}Response`,
+  });
+
+  return DynamicPaginatedResponse as Type<PaginatedResponse<T>>;
 }
