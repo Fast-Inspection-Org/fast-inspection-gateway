@@ -24,7 +24,11 @@ import {
   ApiParam,
   ApiQuery,
 } from '@nestjs/swagger';
-import { apiResponses } from 'src/utils/api-responses';
+import { ApiPaginatedResponse, apiResponses } from 'src/utils/api-responses';
+import {
+  TipoDeterioroAnalisisCriticidadConfigSerializable,
+  TipoDeterioroAnalisisCriticidadConfigSerializableWithAllProperties,
+} from './serializable/tipo-deterioro-analisis-criticidad-config.serializable';
 
 @ApiTags('Tipos de deterioro Análisis de Criticidad de una Configuración')
 @Controller('tipo-deterioro-analisis-criticidad-config')
@@ -43,6 +47,10 @@ export class TipoDeterioroAnalisisCriticidadConfigController {
     status: 200,
     description:
       'Lista de tipos de deterioro recuperada exitosamente. Retorna un array de objetos.',
+    type: ApiPaginatedResponse(
+      TipoDeterioroAnalisisCriticidadConfigSerializable,
+      'Representa la lista de tipos de deterioros obtenidos como respuesta de la solicitud',
+    ),
   })
   @ApiResponse(apiResponses[400])
   @ApiResponse(apiResponses[401])
@@ -87,6 +95,7 @@ export class TipoDeterioroAnalisisCriticidadConfigController {
     status: 200,
     description:
       'Tipo de deterioro recuperado exitosamente. Retorna el objeto solicitado.',
+    type: TipoDeterioroAnalisisCriticidadConfigSerializableWithAllProperties,
   })
   @ApiResponse(apiResponses[400])
   @ApiResponse(apiResponses[401])
