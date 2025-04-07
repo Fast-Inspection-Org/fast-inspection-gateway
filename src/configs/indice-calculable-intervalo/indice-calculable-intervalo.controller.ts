@@ -24,7 +24,8 @@ import {
   ApiParam,
   ApiQuery,
 } from '@nestjs/swagger';
-import { apiResponses } from 'src/utils/api-responses';
+import { ApiPaginatedResponse, apiResponses } from 'src/utils/api-responses';
+import { IndiceCalculableIntervaloSerializable } from './serializable/indice-calculable-intervalo.serializable';
 
 @ApiTags('Indices Calculables con Intervalo de una Configuración')
 @Controller('indice-calculable-intervalo')
@@ -43,6 +44,10 @@ export class IndiceCalculableIntervaloController {
     status: 200,
     description:
       'Lista de índices calculables con intervalo recuperada exitosamente. Retorna un array de objetos.',
+    type: ApiPaginatedResponse(
+      IndiceCalculableIntervaloSerializable,
+      'Representa la lista de indices calculables de tipo intervalo obtenidos como respuesta de la solicitud',
+    ),
   })
   @ApiResponse(apiResponses[400])
   @ApiResponse(apiResponses[401])
@@ -91,6 +96,7 @@ export class IndiceCalculableIntervaloController {
     status: 200,
     description:
       'Índice calculable con intervalo recuperado exitosamente. Retorna el objeto solicitado.',
+    type: IndiceCalculableIntervaloSerializable,
   })
   @ApiResponse(apiResponses[400])
   @ApiResponse(apiResponses[401])

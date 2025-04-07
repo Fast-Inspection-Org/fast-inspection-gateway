@@ -24,7 +24,8 @@ import {
   ApiParam,
   ApiQuery,
 } from '@nestjs/swagger';
-import { apiResponses } from 'src/utils/api-responses';
+import { ApiPaginatedResponse, apiResponses } from 'src/utils/api-responses';
+import { IndiceCalculableSinIntervaloSerializable } from './serializable/indice-calculable-sin-intervalo.serializable';
 
 @ApiTags('Indices Calculables sin Intervalo de una Configuración')
 @Controller('indice-calculable-sin-intervalo')
@@ -43,6 +44,10 @@ export class IndiceCalculableSinIntervaloController {
     status: 200,
     description:
       'Lista de índices calculables sin intervalo recuperada exitosamente. Retorna un array de objetos.',
+    type: ApiPaginatedResponse(
+      IndiceCalculableSinIntervaloSerializable,
+      'Representa la lista de indices calculables de tipo sin intervalo obtenidos como respuesta de la solicitud',
+    ),
   })
   @ApiResponse(apiResponses[400])
   @ApiResponse(apiResponses[401])
@@ -91,6 +96,7 @@ export class IndiceCalculableSinIntervaloController {
     status: 200,
     description:
       'Índice calculable sin intervalo recuperado exitosamente. Retorna el objeto solicitado.',
+    type: IndiceCalculableSinIntervaloSerializable,
   })
   @ApiResponse(apiResponses[400])
   @ApiResponse(apiResponses[401])
