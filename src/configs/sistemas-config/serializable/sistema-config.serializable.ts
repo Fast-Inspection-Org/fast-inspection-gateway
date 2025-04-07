@@ -1,4 +1,4 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, OmitType } from '@nestjs/swagger';
 import { HerramientaSerializable } from 'src/configs/herramientas/serializable/herramienta.serializable';
 
 export class SistemaConfigSerializable {
@@ -25,7 +25,7 @@ export class SistemaConfigSerializable {
   cantSubsistemas: number;
   @ApiProperty({
     description: 'Representa la herramienta seleccionada para dicho sistema',
-    type: HerramientaSerializable,
+    type: () => [HerramientaSerializable],
     required: true,
   })
   herramienta: HerramientaSerializable; // representa el nombre de la herramienta a la que pertenece el sistema
@@ -38,3 +38,5 @@ export class SistemaConfigSerializable {
   })
   configVersion: number; // indica la versión de la configuración a la cual pertenece el sistema
 }
+
+

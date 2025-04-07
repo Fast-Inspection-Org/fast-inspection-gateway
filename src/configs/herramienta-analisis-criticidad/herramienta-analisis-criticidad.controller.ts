@@ -24,7 +24,13 @@ import {
   ApiParam,
   ApiQuery,
 } from '@nestjs/swagger';
-import { apiResponses } from 'src/utils/api-responses';
+import { ApiPaginatedResponse, apiResponses } from 'src/utils/api-responses';
+import {
+  HerramientaAnalisisCriticidadSerializable,
+  HerramientaAnalisisCriticidadSerializableWithAllProperties,
+} from './serializable/herramienta-analisis-criticicidad.serializable';
+import { HerramientaSerializable } from '../herramientas/serializable/herramienta.serializable';
+import { CampoSerializable } from '../campo/serializable/campo.serializable';
 
 @ApiTags('Herramientas de Tipo Análisis de Criticidad')
 @Controller('herramienta-analisis-criticidad')
@@ -116,6 +122,10 @@ export class HerramientaAnalisisCriticidadController {
     status: 201,
     description:
       'Array con cada una de las herrameintas análisis de criticidad que cumplen con las condiciones de los filtros y páginado',
+    type: ApiPaginatedResponse(
+      HerramientaAnalisisCriticidadSerializable,
+      'Representa la lista de herramientas de tipo análisis de criticidad obtenidas como respuesta de la solicitud',
+    ),
   })
   @ApiResponse(apiResponses[400])
   @ApiResponse(apiResponses[401])
@@ -159,6 +169,7 @@ export class HerramientaAnalisisCriticidadController {
     status: 201,
     description:
       'Un objeto que representa la herramienta análisis de criticidad especificada',
+    type: HerramientaAnalisisCriticidadSerializableWithAllProperties,
   })
   @ApiResponse(apiResponses[400])
   @ApiResponse(apiResponses[401])
@@ -194,6 +205,8 @@ export class HerramientaAnalisisCriticidadController {
     status: 201,
     description:
       'Un array con los campos pertenecientes a dicha herramienta análisis de criticidad',
+    type: CampoSerializable,
+    isArray: true,
   })
   @ApiResponse(apiResponses[400])
   @ApiResponse(apiResponses[401])

@@ -1,4 +1,5 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, OmitType } from '@nestjs/swagger';
+import { SistemaConfigSerializable } from 'src/configs/sistemas-config/serializable/sistema-config.serializable';
 
 export class HerramientaSerializable {
   @ApiProperty({
@@ -22,4 +23,15 @@ export class HerramientaSerializable {
     required: true,
   })
   tipo: string;
+}
+
+export class HerramientaSerializableWithAllProperties extends HerramientaSerializable {
+  @ApiProperty({
+    description:
+      'Representa los sistemas de configuración registrados que usan dicha Herramienta',
+    type: () => OmitType(SistemaConfigSerializable, ['herramienta'] as const),
+    isArray: true,
+    required: true,
+  })
+  sistemasConfig: Array<Omit<SistemaConfigSerializable, 'herramienta'>>; // atributo que representa los sistemas de configuración que utilizan dicha herramienta
 }
