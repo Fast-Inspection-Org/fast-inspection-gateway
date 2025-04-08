@@ -24,7 +24,8 @@ import {
   ApiParam,
   ApiQuery,
 } from '@nestjs/swagger';
-import { apiResponses } from 'src/utils/api-responses';
+import { ApiPaginatedResponse, apiResponses } from 'src/utils/api-responses';
+import { EdificationSerializable } from './serializable/edification.serializable';
 
 @ApiTags('Edificaciones')
 @Controller('edifications-controller')
@@ -74,6 +75,10 @@ export class EdificationsControllerController {
     status: 200,
     description:
       'Lista de edificaciones recuperada exitosamente. Retorna array de objetos.',
+    type: ApiPaginatedResponse(
+      EdificationSerializable,
+      'Representa la lista de edificaciones obtenidas como respuesta de la solicitud',
+    ),
   })
   @ApiResponse(apiResponses[400])
   @ApiResponse(apiResponses[401])
@@ -114,6 +119,7 @@ export class EdificationsControllerController {
     status: 200,
     description:
       'Edificación encontrada. Retorna el objeto de edificación solicitado.',
+    type: EdificationSerializable,
   })
   @ApiResponse(apiResponses[400])
   @ApiResponse(apiResponses[401])
