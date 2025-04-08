@@ -19,7 +19,8 @@ import {
   ApiBody,
   ApiQuery,
 } from '@nestjs/swagger';
-import { apiResponses } from 'src/utils/api-responses';
+import { ApiPaginatedResponse, apiResponses } from 'src/utils/api-responses';
+import { InspectionSerializable } from './serializable/inspection.serializable';
 
 @ApiTags('Inspecciones')
 @Controller('inspections')
@@ -68,6 +69,10 @@ export class InspeccionController {
     status: 200,
     description:
       'Lista de inspecciones recuperada exitosamente. Retorna array de objetos de inspección.',
+    type: ApiPaginatedResponse(
+      InspectionSerializable,
+      'Representa la lista de inspecciones obtenidas como respuesta de la solicitud',
+    ),
   })
   @ApiResponse(apiResponses[400])
   @ApiResponse(apiResponses[401])
