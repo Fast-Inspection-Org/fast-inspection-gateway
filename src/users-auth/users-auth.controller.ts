@@ -26,7 +26,9 @@ import {
   ApiParam,
   ApiQuery,
 } from '@nestjs/swagger';
-import { apiResponses } from 'src/utils/api-responses';
+import { ApiPaginatedResponse, apiResponses } from 'src/utils/api-responses';
+import { UserSerializable } from './serializable/user.serializable';
+import { LoginPayloadSerializable } from './serializable/login-payload.serializable';
 
 @ApiTags('Gestión de Usuarios y Autenticación')
 @Controller('users-auth')
@@ -128,6 +130,10 @@ export class UsersAuthController {
     status: 200,
     description:
       'Lista de usuarios recuperada exitosamente. Retorna array de objetos de usuario.',
+    type: ApiPaginatedResponse(
+      UserSerializable,
+      'Representa la lista de usuarios obtenidos como respuesta de la solicitud',
+    ),
   })
   @ApiResponse(apiResponses[400])
   @ApiResponse(apiResponses[401])
@@ -173,6 +179,7 @@ export class UsersAuthController {
   @ApiResponse({
     status: 200,
     description: 'Usuario encontrado. Retorna el objeto de usuario solicitado.',
+    type: UserSerializable,
   })
   @ApiResponse(apiResponses[400])
   @ApiResponse(apiResponses[401])
@@ -201,6 +208,7 @@ export class UsersAuthController {
     status: 200,
     description:
       'Usuario(s) encontrado(s). Retorna objeto o array de usuarios.',
+    type: UserSerializable,
   })
   @ApiResponse(apiResponses[400])
   @ApiResponse(apiResponses[401])
@@ -318,6 +326,7 @@ export class UsersAuthController {
     status: 200,
     description:
       'Autenticación exitosa. Retorna token de acceso y datos del usuario.',
+    type: LoginPayloadSerializable,
   })
   @ApiResponse(apiResponses[400])
   @ApiBody({
