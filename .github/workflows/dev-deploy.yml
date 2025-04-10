@@ -22,8 +22,8 @@ jobs:
         run: |
           ssh -o StrictHostKeyChecking=no ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_IP }} "
             cd /home/deployer && 
-            git clone https://github.com/tu-usuario/tu-repo.git || true && 
-            cd tu-repo && 
+            git clone https://github.com/Fast-Inspection-Org/fast-inspection-gateway || true && 
+            cd fast-inspection-gateway && 
             git pull origin main && 
             docker-compose down && 
             docker-compose pull && 
