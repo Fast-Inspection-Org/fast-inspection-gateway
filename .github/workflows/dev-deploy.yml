@@ -25,7 +25,8 @@ jobs:
             cd /home/deployer && 
             git clone https://github.com/Fast-Inspection-Org/fast-inspection-gateway || true && 
             cd fast-inspection-gateway &&
-            echo 'HOST=${{ secrets.HOST }}' >> .env &&
+            rm -f .env &&
+            echo 'HOST=${{ secrets.HOST }}' > .env &&
             echo 'PORT=${{ secrets.PORT }}' >> .env &&
             echo 'SECRET_WORD=${{ secrets.SECRET_WORD }}' >> .env &&
             echo 'CONFIGS_SERVICE_HOST=${{ secrets.CONFIGS_SERVICE_HOST }}' >> .env &&
