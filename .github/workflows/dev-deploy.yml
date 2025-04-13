@@ -25,7 +25,17 @@ jobs:
             git clone https://github.com/Fast-Inspection-Org/fast-inspection-gateway || true && 
             cd fast-inspection-gateway && 
             git pull origin main && 
-            docker-compose down && 
+            docker-compose down &&
+            PORT='${{ secrets.PORT }}' \
+            SECRET_WORD='${{ secrets.SECRET_WORD }}' \
+            CONFIGS_SERVICE_HOST='${{ secrets.CONFIGS_SERVICE_HOST }}' \
+            CONFIGS_SERVICE_PORT='${{ secrets.CONFIGS_SERVICE_PORT }}' \
+            INSPECTION_CONTROLLER_HOST='${{ secrets.INSPECTION_CONTROLLER_HOST }}' \
+            INSPECTION_CONTROLLER_PORT='${{ secrets.INSPECTION_CONTROLLER_PORT }}' \
+            EDIFICATIONS_CONTROLLER_HOST='${{ secrets.EDIFICATIONS_CONTROLLER_HOST }}' \
+            EDIFICATIONS_CONTROLLER_PORT='${{ secrets.EDIFICATIONS_CONTROLLER_PORT }}' \
+            USERS_AUTH_HOST='${{ secrets.USERS_AUTH_HOST }}' \
+            USERS_AUTH_PORT='${{ secrets.USERS_AUTH_PORT }}' \ 
             docker-compose pull && 
             docker-compose up -d --build
           "
