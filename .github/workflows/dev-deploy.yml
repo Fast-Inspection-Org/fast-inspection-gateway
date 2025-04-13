@@ -23,19 +23,20 @@ jobs:
           ssh -o StrictHostKeyChecking=no ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_IP }} "
             cd /home/deployer && 
             git clone https://github.com/Fast-Inspection-Org/fast-inspection-gateway || true && 
-            cd fast-inspection-gateway && 
+            cd fast-inspection-gateway &&
+            echo 'HOST=${{ secrets.HOST }}' >> .env &&
+            echo 'PORT=${{ secrets.PORT }}' >> .env &&
+            echo 'SECRET_WORD=${{ secrets.SECRET_WORD }}' >> .env &&
+            echo 'CONFIGS_SERVICE_HOST=${{ secrets.CONFIGS_SERVICE_HOST }}' >> .env &&
+            echo 'CONFIGS_SERVICE_PORT=${{ secrets.CONFIGS_SERVICE_PORT }}' >> .env &&
+            echo 'INSPECTION_CONTROLLER_HOST=${{ secrets.INSPECTION_CONTROLLER_HOST }}' >> .env &&
+            echo 'INSPECTION_CONTROLLER_PORT=${{ secrets.INSPECTION_CONTROLLER_PORT }}' >> .env &&
+            echo 'EDIFICATIONS_CONTROLLER_HOST=${{ secrets.EDIFICATIONS_CONTROLLER_HOST }}' >> .env &&
+            echo 'EDIFICATIONS_CONTROLLER_PORT=${{ secrets.EDIFICATIONS_CONTROLLER_PORT }}' >> .env &&
+            echo 'USERS_AUTH_HOST=${{ secrets.USERS_AUTH_HOST }}' >> .env &&
+            echo 'USERS_AUTH_PORT=${{ secrets.USERS_AUTH_PORT }}' >> .env &&  
             git pull origin main && 
             docker-compose down &&
-            PORT='${{ secrets.PORT }}' \
-            SECRET_WORD='${{ secrets.SECRET_WORD }}' \
-            CONFIGS_SERVICE_HOST='${{ secrets.CONFIGS_SERVICE_HOST }}' \
-            CONFIGS_SERVICE_PORT='${{ secrets.CONFIGS_SERVICE_PORT }}' \
-            INSPECTION_CONTROLLER_HOST='${{ secrets.INSPECTION_CONTROLLER_HOST }}' \
-            INSPECTION_CONTROLLER_PORT='${{ secrets.INSPECTION_CONTROLLER_PORT }}' \
-            EDIFICATIONS_CONTROLLER_HOST='${{ secrets.EDIFICATIONS_CONTROLLER_HOST }}' \
-            EDIFICATIONS_CONTROLLER_PORT='${{ secrets.EDIFICATIONS_CONTROLLER_PORT }}' \
-            USERS_AUTH_HOST='${{ secrets.USERS_AUTH_HOST }}' \
-            USERS_AUTH_PORT='${{ secrets.USERS_AUTH_PORT }}' \ 
             docker-compose pull && 
             docker-compose up -d --build
           "
