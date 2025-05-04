@@ -32,6 +32,7 @@ import {
   ApiBody,
   ApiParam,
   ApiQuery,
+  ApiBearerAuth,
 } from '@nestjs/swagger';
 import { ApiPaginatedResponse, apiResponses } from 'src/utils/api-responses';
 import { ConfigSerializable } from './serializable/config.serializable';
@@ -55,6 +56,7 @@ export class ConfigsController {
     description:
       'Recupera todas las configuraciones del sistema con opción de filtrado y ordenamiento. Requiere permisos de administrador o especialista avanzado.',
   })
+  @ApiBearerAuth('JWT-auth')
   @ApiResponse({
     status: 200,
     description:
@@ -113,6 +115,7 @@ export class ConfigsController {
     description:
       'Recupera la configuración más reciente creada en el sistema. Requiere permisos de administrador o especialista avanzado.',
   })
+  @ApiBearerAuth('JWT-auth')
   @ApiResponse({
     status: 200,
     description:
@@ -142,6 +145,7 @@ export class ConfigsController {
     description:
       'Recupera una configuración específica basada en su número de versión. Requiere permisos de administrador o especialista avanzado.',
   })
+  @ApiBearerAuth('JWT-auth')
   @ApiResponse({
     status: 200,
     description:
@@ -180,6 +184,7 @@ export class ConfigsController {
     description:
       'Crea una nueva configuración utilizando una versión existente como base. Requiere permisos de administrador o especialista avanzado.',
   })
+  @ApiBearerAuth('JWT-auth')
   @ApiResponse({
     status: 201,
     description:
@@ -225,6 +230,7 @@ export class ConfigsController {
     description:
       'Crea una nueva configuración sin basarse en una existente. Requiere permisos de administrador o especialista avanzado.',
   })
+  @ApiBearerAuth('JWT-auth')
   @ApiResponse({
     status: 201,
     description:
@@ -259,6 +265,7 @@ export class ConfigsController {
     description:
       'Elimina permanentemente una configuración específica del sistema. Requiere permisos de super administrador.',
   })
+  @ApiBearerAuth('JWT-auth')
   @ApiResponse({
     status: 200,
     description:
@@ -296,6 +303,7 @@ export class ConfigsController {
     description:
       'Elimina permanentemente todas las configuraciones del sistema. Requiere permisos de super administrador.',
   })
+  @ApiBearerAuth('JWT-auth')
   @ApiResponse({
     status: 200,
     description:
@@ -326,6 +334,7 @@ export class ConfigsController {
     description:
       'Modifica los campos de una configuración existente. Requiere permisos de administrador o especialista avanzado.',
   })
+  @ApiBearerAuth('JWT-auth')
   @ApiResponse({
     status: 200,
     description:
@@ -371,6 +380,7 @@ export class ConfigsController {
     description:
       'Establece una configuración específica como la activa en el sistema. Requiere permisos de administrador o especialista avanzado.',
   })
+  @ApiBearerAuth('JWT-auth')
   @ApiResponse({
     status: 200,
     description:
