@@ -25,7 +25,18 @@ async function bootstrap() {
   const config = new DocumentBuilder()
     .setTitle('Fast Inspection')
     .setDescription('The Fast Inspection API description')
-    .setVersion('1.0')
+    .setVersion('1.0').
+    .addBearerAuth(  
+      {
+        type: 'http',
+        scheme: 'bearer',
+        bearerFormat: 'JWT',
+        name: 'JWT',
+        description: 'Enter JWT token',
+        in: 'header',
+      },
+      'JWT-auth', 
+    )
     .addTag('fast-inspection')
     .build();
   const document = SwaggerModule.createDocument(app, config);
