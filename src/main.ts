@@ -5,7 +5,6 @@ import { CorsOptions } from '@nestjs/common/interfaces/external/cors-options.int
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { ExceptionFilter } from './utils/exeption-filter';
 
-
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   // Configuración de CORS
@@ -17,7 +16,7 @@ async function bootstrap() {
   };
 
   // se indica el uso global del rpc expetion filter
-  app.useGlobalFilters(new ExceptionFilter())
+  app.useGlobalFilters(new ExceptionFilter());
 
   app.enableCors(corsOptions);
 
@@ -25,8 +24,8 @@ async function bootstrap() {
   const config = new DocumentBuilder()
     .setTitle('Fast Inspection')
     .setDescription('The Fast Inspection API description')
-    .setVersion('1.0').
-    .addBearerAuth(  
+    .setVersion('1.0')
+    .addBearerAuth(
       {
         type: 'http',
         scheme: 'bearer',
@@ -35,13 +34,12 @@ async function bootstrap() {
         description: 'Enter JWT token',
         in: 'header',
       },
-      'JWT-auth', 
+      'JWT-auth',
     )
     .addTag('fast-inspection')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
-
 
   await app.listen(parseInt(envs.PORT));
 }
