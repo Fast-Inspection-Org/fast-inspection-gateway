@@ -1,4 +1,4 @@
-const tiposDeteriorosExample = `[
+export const tiposDeteriorosExample = `[
     {
       "id": 1,
       "nombre": "Indice Calculable Detectabilidad",
@@ -133,4 +133,4 @@ const tiposDeteriorosExample = `[
         }
       ]
     }
-  ],`;
+  ]`;

@@ -1,5 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { TipoDeterioroAnalisisCriticidadConfigSerializable } from 'src/configs/tipo-deterioro-analisis-criticidad-config/serializable/tipo-deterioro-analisis-criticidad-config.serializable';
+import { tiposDeteriorosExample } from '../dto/examples.dto';
+
 
 export class MaterialConfigSerializable {
   @ApiProperty({
