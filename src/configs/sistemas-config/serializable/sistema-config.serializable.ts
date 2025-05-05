@@ -1,5 +1,6 @@
 import { ApiProperty, OmitType } from '@nestjs/swagger';
 import { HerramientaSerializable } from 'src/configs/herramientas/serializable/herramienta.serializable';
+import { SubsistemaConfigSerializableDetails } from 'src/configs/subsistemas-config/serializable/subsistema-config.serializable';
 
 export class SistemaConfigSerializable {
   @ApiProperty({
@@ -39,4 +40,12 @@ export class SistemaConfigSerializable {
   configVersion: number; // indica la versión de la configuración a la cual pertenece el sistema
 }
 
-
+export class SistemaConfigSerializableDetails extends SistemaConfigSerializable {
+  @ApiProperty({
+    description: 'Representa los subsistemas del sistema',
+    type: SubsistemaConfigSerializableDetails,
+    isArray: true,
+    required: true,
+  })
+  subSistemasConfig: SubsistemaConfigSerializableDetails[];
+}

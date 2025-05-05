@@ -1,4 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { MaterialConfigSerializableDetails } from 'src/configs/materiales-config/serializable/material-config.serializable';
 
 export class SubsistemaConfigSerializable {
   @ApiProperty({
@@ -22,4 +23,14 @@ export class SubsistemaConfigSerializable {
     required: true,
   })
   cantMateriales: number;
+}
+
+export class SubsistemaConfigSerializableDetails extends SubsistemaConfigSerializable {
+  @ApiProperty({
+    description: 'Representa los materiales del Subsistema',
+    type: MaterialConfigSerializableDetails,
+    isArray: true,
+    required: true,
+  })
+  materialesConfig: MaterialConfigSerializableDetails[];
 }

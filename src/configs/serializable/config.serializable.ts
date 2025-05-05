@@ -1,4 +1,11 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { HerramientaSerializable } from '../herramientas/serializable/herramienta.serializable';
+import { SistemaConfigSerializableDetails } from '../sistemas-config/serializable/sistema-config.serializable';
+import { IndiceCalculableSerializable } from '../indice-calculable/serializable/indice-calculable.serializable';
+import {
+  herramientasObtainsExample,
+  indicesCalculablesObtainsExample,
+} from '../dto/examples-dto';
 
 export class ConfigSerializable {
   @ApiProperty({
@@ -39,4 +46,28 @@ export class ConfigSerializable {
     required: true,
   })
   porcentajeCompletitud: number;
+}
+
+export class ConfigSerializableDetails extends ConfigSerializable {
+  @ApiProperty({
+    description: 'Representa los indices calculables de la configuración',
+    example: indicesCalculablesObtainsExample,
+    type: 'json',
+    required: true,
+  })
+  indicesCalculables: Array<IndiceCalculableSerializable>;
+  @ApiProperty({
+    description: 'Representa los sistemas de la configuración',
+    type: SistemaConfigSerializableDetails,
+    isArray: true,
+    required: true,
+  })
+  sistemasConfig: SistemaConfigSerializableDetails[];
+  @ApiProperty({
+    description: 'Representa las herramientas de la configuración',
+    example: herramientasObtainsExample,
+    type: 'json',
+    required: true,
+  })
+  herramientas: Array<HerramientaSerializable>;
 }

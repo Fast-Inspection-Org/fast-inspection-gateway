@@ -35,7 +35,7 @@ import {
   ApiBearerAuth,
 } from '@nestjs/swagger';
 import { ApiPaginatedResponse, apiResponses } from 'src/utils/api-responses';
-import { ConfigSerializable } from './serializable/config.serializable';
+import { ConfigSerializable, ConfigSerializableDetails } from './serializable/config.serializable';
 
 @ApiTags('Configuraciones')
 @Controller('configs')
@@ -120,7 +120,7 @@ export class ConfigsController {
     status: 200,
     description:
       'Última configuración recuperada exitosamente. Retorna el objeto de configuración.',
-    type: ConfigSerializable,
+    type: ConfigSerializableDetails,
   })
   @ApiResponse(apiResponses[400])
   @ApiResponse(apiResponses[401])
