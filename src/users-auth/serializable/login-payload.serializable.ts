@@ -9,7 +9,7 @@ class LoginPayload {
     type: 'texto',
     required: true,
   })
-  userId: string;
+  id: string;
   @ApiProperty({
     description: 'Representa el rol del usuario que realizó la acción de logeo',
     example:
@@ -35,8 +35,5 @@ export class LoginPayloadSerializable {
     type: LoginPayload,
     required: true,
   })
-  payload: {
-    userId: string;
-    rol: RolEnum;
-  };
+  payload: LoginPayload;
 }
