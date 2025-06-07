@@ -28,7 +28,7 @@ export class LoginPayloadSerializable {
     type: 'texto',
     required: true,
   })
-  token: string;
+  accessToken: string;
   @ApiProperty({
     description:
       'Representa el payload con metadatos que se genera como parte del proceso de autenticación',
