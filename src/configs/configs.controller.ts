@@ -35,7 +35,12 @@ import {
   ApiBearerAuth,
 } from '@nestjs/swagger';
 import { ApiPaginatedResponse, apiResponses } from 'src/utils/api-responses';
-import { ConfigSerializable, ConfigSerializableDetails } from './serializable/config.serializable';
+import {
+  ConfigSerializable,
+  ConfigSerializableDetails,
+} from './serializable/config.serializable';
+import { SistemaConfigSerializableDetails } from './sistemas-config/serializable/sistema-config.serializable';
+import { version } from 'os';
 
 @ApiTags('Configuraciones')
 @Controller('configs')
@@ -165,6 +170,44 @@ export class ConfigsController {
     try {
       return await firstValueFrom(
         this.configsClient.send('getConfigByVersion', versionConfig),
+      );
+    } catch (error) {
+      const rpcError: RpcError = error;
+      throw new HttpException(rpcError.message, rpcError.status);
+    }
+  }
+  @Get('getSistemasConfig/:version')
+  @Roles([
+    RolEnum.SuperAdministrador,
+    RolEnum.Administrador,
+    RolEnum.EspecialistaAvz,
+  ])
+  @UseGuards(AuthGuard, RolGuard)
+  @ApiOperation({
+    summary: 'Obtener sistemas de una configuración por versión específica',
+    description:
+      'Recupera los sistemas una configuración específica basada en su número de versión. Requiere permisos de administrador o especialista avanzado.',
+  })
+  @ApiBearerAuth('JWT-auth')
+  @ApiResponse({
+    status: 200,
+    description: 'Sistemas de Configuración recuperados exitosamente.',
+    type: SistemaConfigSerializableDetails,
+    isArray: true,
+  })
+  @ApiResponse(apiResponses[400])
+  @ApiResponse(apiResponses[401])
+  @ApiParam({
+    name: 'version',
+    type: Number,
+    description: 'Número de versión de la configuración a recuperar',
+  })
+  public async getSistemasConfig(
+    @Param('version', ParseIntPipe) version: number,
+  ) {
+    try {
+      return await firstValueFrom(
+        this.configsClient.send('getSistemasConfig', version),
       );
     } catch (error) {
       const rpcError: RpcError = error;
