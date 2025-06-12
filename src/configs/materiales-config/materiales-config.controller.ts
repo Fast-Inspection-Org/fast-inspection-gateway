@@ -80,6 +80,42 @@ export class MaterialesConfigController {
     }
   }
 
+  @Get('getMaterial/:id')
+  @ApiOperation({
+    summary: 'Obtener un material por su identificador',
+    description:
+      'Recupera todos los materiales de configuración asociados a un subsistema específico, con opción de filtrado por nombre.',
+  })
+  @ApiResponse({
+    status: 200,
+    description:
+      'Lista de materiales de configuración recuperada exitosamente. Retorna un array de objetos.',
+    type: ApiPaginatedResponse(
+      MaterialConfigSerializable,
+      'Representa la lista de materiales obtenidos como respuesta de la solicitud',
+    ),
+  })
+  @ApiResponse(apiResponses[400])
+  @ApiResponse(apiResponses[401])
+  @ApiParam({
+    name: 'id',
+    type: Number,
+    description:
+      'ID del subsistema de configuración al que pertenecen los materiales',
+  })
+  public async getMaterial(
+    @Param('id', ParseIntPipe) id,
+  ) {
+    try {
+      return await firstValueFrom(
+        this.configsClient.send('getMaterial', id),
+      );
+    } catch (error) {
+      const rpcError: RpcError = error;
+      throw new HttpException(rpcError.message, rpcError.status);
+    }
+  }
+
   @Post('createMaterialConfig')
   @ApiOperation({
     summary: 'Crear nuevo material de configuración',
