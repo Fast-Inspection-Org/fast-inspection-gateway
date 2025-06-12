@@ -182,6 +182,43 @@ export class SistemasConfigController {
     }
   }
 
+  @Get('getSistemaConfig/:id')
+  @ApiOperation({
+    summary: 'Obtener sistema config por su id',
+    description:
+      'Recupera configuraciones de sistema filtradas por versión y otros parámetros opcionales.',
+  })
+  @ApiResponse({
+    status: 200,
+    description:
+      'Lista de configuraciones filtradas recuperada exitosamente. Retorna un array de objetos.',
+    type: ApiPaginatedResponse(
+      SistemaConfigSerializable,
+      'Representa la lista de sistemas obtenidos como respuesta de la solicitud',
+    ),
+  })
+  @ApiResponse(apiResponses[400])
+  @ApiResponse(apiResponses[401])
+  @ApiParam({
+    name: 'id',
+    type: Number,
+    description: 'Versión de configuración por la cual filtrar',
+  })
+ 
+  public async getSistemaConfig(
+    @Param('id') id: number,
+   
+  ) {
+    try {
+      return await firstValueFrom(
+        this.configsClient.send('getSistemaConfig', id),
+      );
+    } catch (error) {
+      const rpcError: RpcError = error;
+      throw new HttpException(rpcError.message, rpcError.status);
+    }
+  }
+
   @Delete('deleteSistemaConfig/:id')
   @ApiOperation({
     summary: 'Eliminar configuración de sistema',
