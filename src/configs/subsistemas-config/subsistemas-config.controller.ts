@@ -109,7 +109,7 @@ export class SubsistemasConfigController {
     }
   }
 
-  @Patch('updateSubsistemaConfig/:id/:idSistemaConfig')
+  @Patch('updateSubsistemaConfig/:id')
   @ApiOperation({
     summary: 'Actualizar subsistema de configuración',
     description:
@@ -127,12 +127,6 @@ export class SubsistemasConfigController {
     type: Number,
     description: 'ID del subsistema de configuración a actualizar',
   })
-  @ApiParam({
-    name: 'idSistemaConfig',
-    type: Number,
-    description:
-      'ID del sistema de configuración al que pertenece el subsistema',
-  })
   @ApiBody({
     type: UpdateSubsistemaConfigDTO,
     description:
@@ -140,14 +134,12 @@ export class SubsistemasConfigController {
   })
   public async updateSubsistemaConfig(
     @Param('id', ParseIntPipe) idSubsistemaConfig: number,
-    @Param('idSistemaConfig', ParseIntPipe) idSistemaConfig,
     @Body() updateSubsistemaConfigDTO: UpdateSubsistemaConfigDTO,
   ) {
     try {
       return await firstValueFrom(
         this.configsClient.send('updateSubsistemaConfig', {
           idSubsistemaConfig: idSubsistemaConfig,
-          idSistemaConfig: idSistemaConfig,
           updateSubsistemaConfigDTO: updateSubsistemaConfigDTO,
         }),
       );
