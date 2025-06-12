@@ -107,7 +107,7 @@ export class MaterialesConfigController {
     }
   }
 
-  @Patch('updateMaterialConfig/:id/:idSubsistemaConfig')
+  @Patch('updateMaterialConfig/:id')
   @ApiOperation({
     summary: 'Actualizar material de configuración',
     description:
@@ -125,12 +125,6 @@ export class MaterialesConfigController {
     type: Number,
     description: 'ID del material de configuración a actualizar',
   })
-  @ApiParam({
-    name: 'idSubsistemaConfig',
-    type: Number,
-    description:
-      'ID del subsistema de configuración al que pertenece el material',
-  })
   @ApiBody({
     type: UpdateMaterialConfigDTO,
     description:
@@ -138,14 +132,12 @@ export class MaterialesConfigController {
   })
   public async updateMaterialConfig(
     @Param('id', ParseIntPipe) idMaterialConfig: number,
-    @Param('idSubsistemaConfig', ParseIntPipe) idSubsistemaConfig: number,
     @Body() updateMaterialConfigDTO: UpdateMaterialConfigDTO,
   ) {
     try {
       return await firstValueFrom(
         this.configsClient.send('updateMaterialConfig', {
           idMaterialConfig: idMaterialConfig,
-          idSubsistemaConfig: idSubsistemaConfig,
           updateMaterialConfigDTO: updateMaterialConfigDTO,
         }),
       );
