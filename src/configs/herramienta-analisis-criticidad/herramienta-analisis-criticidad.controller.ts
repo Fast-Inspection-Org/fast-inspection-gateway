@@ -147,7 +147,7 @@ export class HerramientaAnalisisCriticidadController {
   ) {
     try {
       return await firstValueFrom(
-        this.configsClient.send('getAllHerramientasAnalisisCriticidad', {
+        this.configsClient.send('getAllHerrramientasAnalisisCriticidad', {
           versionConfig: versionConfig,
           nombre: nombre,
         }),
