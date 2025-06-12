@@ -80,6 +80,41 @@ export class SubsistemasConfigController {
     }
   }
 
+  @Get('getSubsistemaConfig/:id')
+  @ApiOperation({
+    summary: 'Obtener el subsistema por su identificador',
+    description:
+      'Recupera todos los subsistemas de configuración asociados a un sistema específico, con opción de filtrado por nombre.',
+  })
+  @ApiResponse({
+    status: 200,
+    description:
+      'Lista de subsistemas de configuración recuperada exitosamente. Retorna un array de objetos.',
+    type: ApiPaginatedResponse(
+      SubsistemaConfigSerializable,
+      'Representa la lista de subsistemas obtenidos como respuesta de la solicitud',
+    ),
+  })
+  @ApiResponse(apiResponses[400])
+  @ApiResponse(apiResponses[401])
+  @ApiParam({
+    name: 'id',
+    type: Number,
+    description: 'ID del subsistema que se desea obtener',
+  })
+  public async getSubsistemaConfig(
+    @Param('id', ParseIntPipe) id,
+  ) {
+    try {
+      return await firstValueFrom(
+        this.configsClient.send('getSubsistemaConfig', id),
+      );
+    } catch (error) {
+      const rpcError: RpcError = error;
+      throw new HttpException(rpcError.message, rpcError.status);
+    }
+  }
+
   @Post('createSubsistemaConfig')
   @ApiOperation({
     summary: 'Crear nuevo subsistema de configuración',
