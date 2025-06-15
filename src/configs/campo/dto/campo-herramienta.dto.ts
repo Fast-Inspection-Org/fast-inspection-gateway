@@ -1,8 +1,6 @@
-import { ApiProperty } from '@nestjs/swagger';
-import { HerramientaDTO } from 'src/configs/herramientas/dto/herramienta.dto';
+import { ApiProperty } from "@nestjs/swagger";
 
-export class CampoDTO {
-  id: number;
+export class CampoDTOHerramienta {
   @ApiProperty({
     description: 'Representa el nombre del campo afectado',
     example: 'Salud',
@@ -26,12 +24,4 @@ export class CampoDTO {
     required: true,
   })
   configVersion: number; // indica la version a la que pertence el campo
-  @ApiProperty({
-    description: 'Representa la herramienta a la cual pertenece dicho campo',
-    example: '{"id": 1}',
-    type: 'json',
-    required: true,
-  })
-  herramientaAnalisisCriticidad?: HerramientaDTO; // Atributo que define a la herramienta analisis de criticidad que pertenece el campo
 }
-
