@@ -9,13 +9,13 @@ export class HerramientaDTO {
     required: true,
   })
   nombre: string;
-   @ApiProperty({
+  @ApiProperty({
     description: 'Representa los campos de la herramienta',
-    
-    type: CampoDTO,
+    type: CampoDTOHerramienta,
     required: true,
+    isArray: true,
   })
-  campos: Array<CampoDTOHerramienta>
+  campos: Array<CampoDTOHerramienta>;
   tipo: string;
   @ApiProperty({
     description:
