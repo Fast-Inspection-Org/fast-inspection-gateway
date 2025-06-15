@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { CampoDTO } from 'src/configs/campo/dto/campo.dto';
+import { CampoDTO, CampoDTOHerramienta } from 'src/configs/campo/dto/campo.dto';
 
 export class HerramientaDTO {
   @ApiProperty({
@@ -9,6 +9,13 @@ export class HerramientaDTO {
     required: true,
   })
   nombre: string;
+   @ApiProperty({
+    description: 'Representa los campos de la herramienta',
+    
+    type: CampoDTO,
+    required: true,
+  })
+  campos: Array<CampoDTOHerramienta>
   tipo: string;
   @ApiProperty({
     description:
