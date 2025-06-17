@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { CampoDTOHerramienta } from 'src/configs/campo/dto/campo-herramienta.dto';
+import { CampoDTOHerramienta, CampoDTOHerramientaEdit } from 'src/configs/campo/dto/campo-herramienta.dto';
 
 export class UpdateHerramientaAnalisisCriticidadDTO {
   @ApiProperty({
@@ -15,5 +15,5 @@ export class UpdateHerramientaAnalisisCriticidadDTO {
     required: true,
     isArray: true,
   })
-  campos: CampoDTOHerramienta[];
+  campos: CampoDTOHerramientaEdit[];
 }
