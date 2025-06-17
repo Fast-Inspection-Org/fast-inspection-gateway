@@ -9,11 +9,11 @@ export class UpdateHerramientaAnalisisCriticidadDTO {
     required: true,
   })
   nombre: string;
-    @ApiProperty({
+  @ApiProperty({
     description: 'Representa los nuevos campos de la herramienta',
-    example: 'Herramienta de Análisis de Criticidad',
-    type: 'texto',
+    type: CampoDTOHerramienta,
     required: true,
+    isArray: true,
   })
-  campos: CampoDTOHerramienta[]
+  campos: CampoDTOHerramienta[];
 }
