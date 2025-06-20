@@ -26,6 +26,7 @@ import {
 } from '@nestjs/swagger';
 import { ApiPaginatedResponse, apiResponses } from 'src/utils/api-responses';
 import { EdificationSerializable } from './serializable/edification.serializable';
+import { EdificationDetailsSerializable } from './serializable/edification-details.serializable';
 
 @ApiTags('Edificaciones')
 @Controller('edifications-controller')
@@ -119,7 +120,7 @@ export class EdificationsControllerController {
     status: 200,
     description:
       'Edificación encontrada. Retorna el objeto de edificación solicitado.',
-    type: EdificationSerializable,
+    type: EdificationDetailsSerializable,
   })
   @ApiResponse(apiResponses[400])
   @ApiResponse(apiResponses[401])
