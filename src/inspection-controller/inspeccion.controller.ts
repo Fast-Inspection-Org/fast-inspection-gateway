@@ -4,6 +4,7 @@ import {
   Get,
   HttpException,
   Inject,
+  Param,
   Post,
   Query,
 } from '@nestjs/common';
@@ -95,6 +96,31 @@ export class InspeccionController {
         this.inspectionsClient.send('find-inspections', {
           edificacionId,
           configId,
+        }),
+      );
+    } catch (error) {
+      const rpcError: RpcError = error;
+      throw new HttpException(rpcError.message, rpcError.status);
+    }
+  }
+
+  @Get(':id')
+  @ApiOperation({
+    summary: 'Obtener la inspeccion',
+    description: 'Endpoint para obtener toda la inspección solicitada.',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Inspección solicitada.',
+    type: InspectionSerializable,
+  })
+  @ApiResponse(apiResponses[400])
+  @ApiResponse(apiResponses[401])
+  public async findInspection(@Param('id') id: string) {
+    try {
+      return await firstValueFrom(
+        this.inspectionsClient.send('find-inspection', {
+          id,
         }),
       );
     } catch (error) {
