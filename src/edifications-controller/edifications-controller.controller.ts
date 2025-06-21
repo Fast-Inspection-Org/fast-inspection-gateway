@@ -169,7 +169,7 @@ export class EdificationsControllerController {
       return await firstValueFrom(
         this.edificationsClient.send('updateEdificacion', {
           id,
-          updateEdificacionDto,
+          ...updateEdificacionDto,
         }),
       );
     } catch (error) {
