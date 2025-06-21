@@ -81,10 +81,21 @@ export class InspeccionController {
     required: false,
     description: 'ID de la edificación para filtrar las inspecciones',
   })
-  public async findInspections(@Query('edificacionId') edificacionId: string) {
+  @ApiQuery({
+    name: 'configId',
+    required: false,
+    description: 'ID de la configuración para filtrar las inspecciones',
+  })
+  public async findInspections(
+    @Query('edificacionId') edificacionId: string,
+    @Query('configId') configId: string,
+  ) {
     try {
       return await firstValueFrom(
-        this.inspectionsClient.send('find-inspections', { edificacionId }),
+        this.inspectionsClient.send('find-inspections', {
+          edificacionId,
+          configId,
+        }),
       );
     } catch (error) {
       const rpcError: RpcError = error;
