@@ -119,9 +119,7 @@ export class InspeccionController {
   public async findInspection(@Param('id') id: string) {
     try {
       return await firstValueFrom(
-        this.inspectionsClient.send('find-inspection', {
-          id,
-        }),
+        this.inspectionsClient.send('find-inspection', id),
       );
     } catch (error) {
       const rpcError: RpcError = error;
