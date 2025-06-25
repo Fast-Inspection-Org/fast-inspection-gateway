@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   HttpException,
   Inject,
@@ -120,6 +121,29 @@ export class InspeccionController {
     try {
       return await firstValueFrom(
         this.inspectionsClient.send('find-inspection', id),
+      );
+    } catch (error) {
+      const rpcError: RpcError = error;
+      throw new HttpException(rpcError.message, rpcError.status);
+    }
+  }
+
+  @Delete(':id')
+  @ApiOperation({
+    summary: 'Eliminar la inspeccion',
+    description: 'Endpoint para eliminar la inspección solicitada.',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Inspección solicitada.',
+    type: InspectionSerializable,
+  })
+  @ApiResponse(apiResponses[400])
+  @ApiResponse(apiResponses[401])
+  public async deleteInspeccion(@Param('id') id: string) {
+    try {
+      return await firstValueFrom(
+        this.inspectionsClient.send('delete-inspection', id),
       );
     } catch (error) {
       const rpcError: RpcError = error;
