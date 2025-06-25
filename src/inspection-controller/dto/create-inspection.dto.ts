@@ -4,6 +4,13 @@ import { deteriorosExample } from './examples-dto';
 
 export class CreateInspectionDTO {
   @ApiProperty({
+    description: 'Representa el indentificador de la inspección',
+    example: '1',
+    type: 'texto',
+    required: false,
+  })
+  id?: string;
+  @ApiProperty({
     description:
       'Representa el indentificador de la configuración con la que fue realizada la inspección',
     example: '1',
