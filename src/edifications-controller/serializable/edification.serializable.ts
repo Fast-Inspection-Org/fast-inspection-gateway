@@ -38,4 +38,18 @@ export class EdificationSerializable {
     required: true,
   })
   coordY: number;
+  @ApiProperty({
+    description: 'Representa la criticidad de dicha edificación',
+    example: '5',
+    type: 'numérico',
+    required: true,
+  })
+  criticidad: number;
+  @ApiProperty({
+    description: 'Representa la cantidad de deterioros, de dicha edificación',
+    example: '10',
+    type: 'numérico',
+    required: true,
+  })
+  cantDeterioros: number;
 }
